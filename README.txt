@@ -1,0 +1,5 @@
+Implementation of hijacking (intercepting) system calls through a kernel module to the Linux kernel.
+
+Creation of a new system call named my_syscall into the system call table, which allows users to send commands from userspace, to intercept another pre-existing system call (like read, write, open, etc.). After a system call is intercepted, the intercepted system call would log a message first before continuing performing what it was supposed to do.
+
+For example, if a user calls my_syscall with command REQUEST_SYSCALL_INTERCEPT and target system call number __NR_mkdir as parameters, then the mkdir system call would be intercepted; then, when another process calls mkdir, mkdir would log some message (e.g., "muhahaha") first, then perform what it was supposed to do (i.e., make a directory). Furthermore, mkdir logs a message only when a certain set of processes (PIDs) are calling mkdir.
